@@ -1,0 +1,8 @@
+.CodeMirror {
+	border: 1px solid #cccccc;
+}
+
+.line_error {
+	color:red;
+	background:red;
+}
