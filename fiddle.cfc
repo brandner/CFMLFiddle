@@ -19,6 +19,15 @@
 			-- Perhaps we can replace some of them upon execution??
 			- Eliminate variable references that might interfere with CFMLFiddle
 		--->
+		
+		<cfset local.disallowedTags = "cfexecute,cffile,cfdirectory,cfinclude,cfhttp,cfquery,cfregistry,cfschedule,cfcomponent,cftransaction,cfdump,cfapplet,cfcache,cfchart,cfcollection,cfdocument,cfcontent,cfform,cfgrid,cfhtmlhead,cfimport" />
+		<cfset local.disallowedFunctions = "trace,cache,file" />
+		<cfloop list="#ListAppend(local.disallowedTags,local.disallowedFunctions)#" index="local.i">
+			<cfif FindNoCase(local.i,arguments.fCode) GT 0>
+				<cfreturn false />
+			</cfif>
+		</cfloop>
+		
 		<cfreturn true />
 	</cffunction>
 	

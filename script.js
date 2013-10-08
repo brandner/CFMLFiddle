@@ -12,16 +12,19 @@ $( document ).ready(function() {
 		}
 	}
 	// initialize CodeMirror editor
-	myCodeMirror = CodeMirror.fromTextArea(	fCode, {lineNumbers:true} );
-	if (fID != "0") {
-		$('#fID').val(fID);
-		// if we have a fiddle, load it up and run it
-		var codeXhr = $.get('./fiddle.cfc?method=getFiddleCode&fID=' + fID + '&returnformat=json');
-		codeXhr.done(function(data) {
-			// set the CodeMirror editor accordingly
-			myCodeMirror.setValue(jQuery.parseJSON(data));
-			runCode(fID);
-		});
+	if (!$('#hideCodeEditor').length) {
+		myCodeMirror = CodeMirror.fromTextArea(	fCode, {lineNumbers:true} );
+		if (fID != "0") {
+			$('#fID').val(fID);
+			// if we have a fiddle, load it up and run it
+			var codeXhr = $.get('./fiddle.cfc?method=getFiddleCode&fID=' + fID + '&returnformat=json');
+			codeXhr.done(function(data) {
+				// set the CodeMirror editor accordingly
+				myCodeMirror.setValue(jQuery.parseJSON(data));
+				runCode(fID);
+				updateEmbedURLs();
+			});
+		}
 	}
 });
 
@@ -33,6 +36,12 @@ function highlightLine(codeMirror, lineNumber) {
         
     //Set line css class
     codeMirror.addLineClass(actualLineNumber, 'background', 'line-error');
+}
+function updateEmbedURLs() {
+	if ($('a#embedLinkCode').length) {
+		$('a#embedLinkCode').prop("href", "?embed=code&fID=" + $('#fID').val());
+		$('a#embedLinkOutput').prop("href", "?embed=output&fID=" + $('#fID').val());
+	}
 }
 function runCode(fID) {
 	// use Ajax to run a Fiddle and put the output into the right DIV 
@@ -62,7 +71,8 @@ function saveAndRunCode() {
 		newFID = runResult.FID.trim();
 		// grab the new fiddle ID and push to the hash state
 		jQuery.bbq.pushState('1/' + newFID,2);
-		runCode(newFID);;
+		runCode(newFID);
+		updateEmbedURLs();
 	});
 
 }
@@ -85,6 +95,7 @@ $(window).bind( 'hashchange', function(e) {
 				// set the CodeMirror editor accordingly
 				myCodeMirror.setValue(jQuery.parseJSON(data));
 				runCode(fID);
+				updateEmbedURLs();
 			});
 		}
 	}
