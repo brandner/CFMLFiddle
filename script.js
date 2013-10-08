@@ -13,7 +13,7 @@ $( document ).ready(function() {
 	}
 	// initialize CodeMirror editor
 	if (!$('#hideCodeEditor').length) {
-		myCodeMirror = CodeMirror.fromTextArea(	fCode, {lineNumbers:true} );
+		myCodeMirror = CodeMirror.fromTextArea(	document.getElementById("fCode"), {lineNumbers:true} );
 		if (fID != "0") {
 			$('#fID').val(fID);
 			// if we have a fiddle, load it up and run it

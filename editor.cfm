@@ -1,9 +1,10 @@
-<html>
+<!DOCTYPE html>
 <head><title>CFMLFiddle</title>
 <script src="./js/codemirror-3.18/lib/codemirror.js"></script>
 <link rel="stylesheet" href="./js/codemirror-3.18/lib/codemirror.css">
 <link rel="stylesheet" href="./style.css">
-<!---TODO: CFML mode for CodeMirror? <script src="./codemirror-3.18/mode/javascript/javascript.js"></script>--->
+<!---TODO: CFML mode for CodeMirror? 
+<script src="./js/codemirror-3.18/mode/htmlembedded/htmlembedded.js"></script>--->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <!--- jQuery BBQ for hash handling and history management --->
 <script src="./js/jquery.ba-bbq.js"></script>
@@ -39,8 +40,8 @@
 		<div style="float:left;width:48%;">
 		    <textarea id="fCode" name="fCode" label="code" html="yes" wrap="virtual" rows="20" cols="50">#fCode#</textarea>
 		    <br />
-		    <a id="embedLinkCode" href="#rootURL#?embed=code&fID=#fID#" />Embed code</a>
-			| <a id="embedLinkOutput" href="#rootURL#?embed=output&fID=#fID#" />Embed output</a>
+		    <a id="embedLinkCode" href="#rootURL#?embed=code&fID=#fID#">Embed code</a>
+			| <a id="embedLinkOutput" href="#rootURL#?embed=output&fID=#fID#">Embed output</a>
 		</div>
 		<!--- area for the output --->
 		<div style="float:right;width:48%;">
